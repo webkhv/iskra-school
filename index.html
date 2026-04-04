@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ИСКРА — Школа нового формата в Хабаровске</title>
+    <meta name="description" content="Школа ИСКРА в Хабаровске. Проектное обучение, мини-группы до 15 человек, наставники-практики. Никакой бюрократии — только реальные навыки.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* ============ RESET & BASE ============ */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --black: #0d0d0d;
+            --dark: #1a1a1a;
+            --gray: #2a2a2a;
+            --light-gray: #b0b0b0;
+            --white: #f5f5f5;
+            --yellow: #FFD600;
+            --orange: #FF6D00;
+            --yellow-light: rgba(255, 214, 0, 0.08);
+            --orange-light: rgba(255, 109, 0, 0.06);
+        }
+
+        html { scroll-behavior: smooth; font-size: 16px; }
+
+        body {
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            background: var(--black);
+            color: var(--white);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+        }
+
+        a { color: inherit; text-decoration: none; transition: opacity 0.2s; }
+        a:hover { opacity: 0.85; }
+        img { max-width: 100%; display: block; }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ============ NAVIGATION ============ */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 0 24px;
+            background: rgba(13, 13, 13, 0.92);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+
+        .logo {
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+            font-size: 1.4rem;
+            color: var(--yellow);
+            letter-spacing: 0.08em;
+        }
+
+        .logo span { color: var(--white); }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+            font-size: 0.82rem;
+            font-weight: 500;
+        }
+
+        .nav-links a {
+            color: var(--light-gray);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        .nav-links a:hover { color: var(--white); }
+
+        .nav-cta {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.82rem;
+            font-weight: 600;
+            padding: 10px 24px;
+            background: var(--yellow);
+            color: var(--black);
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            transition: background 0.2s, transform 0.15s;
+        }
+
+        .nav-cta:hover {
+            background: #ffe444;
+            transform: translateY(-1px);
+            opacity: 1;
+        }
+
+        /* HAMBURGER */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 4px;
+        }
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--white);
+            border-radius: 2px;
+            transition: 0.25s;
+        }
+
+        /* ============ HERO ============ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding-top: 64px;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 214, 0, 0.12) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -10%;
+            left: -5%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 109, 0, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--orange);
+            font-weight: 600;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .hero-label::before {
+            content: '';
+            display: inline-block;
+            width: 24px;
+            height: 2px;
+            background: var(--orange);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.8rem, 7vw, 5.5rem);
+            margin-bottom: 32px;
+            max-width: 800px;
+        }
+
+        .hero h1 .highlight { color: var(--yellow); }
+        .hero h1 .highlight-orange { color: var(--orange); }
+
+        .hero-sub {
+            font-size: 1.05rem;
+            color: var(--light-gray);
+            max-width: 580px;
+            margin-bottom: 48px;
+            line-height: 1.8;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding: 16px 36px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .btn-primary {
+            background: var(--yellow);
+            color: var(--black);
+        }
+
+        .btn-primary:hover {
+            background: #ffe444;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(255, 214, 0, 0.25);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+            border: 1.5px solid rgba(255,255,255,0.2);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--white);
+            transform: translateY(-2px);
+            opacity: 1;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 48px;
+            margin-top: 72px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .hero-stat-value {
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+            font-size: 2.4rem;
+            color: var(--yellow);
+            line-height: 1;
+        }
+
+        .hero-stat-label {
+            font-size: 0.78rem;
+            color: var(--light-gray);
+            margin-top: 8px;
+            line-height: 1.4;
+        }
+
+        /* ============ SECTION COMMON ============ */
+        section {
+            padding: 120px 0;
+        }
+
+        .section-label {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--orange);
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4.5vw, 3.2rem);
+            margin-bottom: 24px;
+        }
+
+        .section-desc {
+            color: var(--light-gray);
+            max-width: 600px;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        /* ============ PROBLEMS ============ */
+        #problems {
+            background: var(--dark);
+            position: relative;
+        }
+
+        .problems-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 56px;
+        }
+
+        .problem-card {
+            background: var(--black);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 12px;
+            padding: 36px 32px;
+            transition: border-color 0.25s, transform 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .problem-card:hover {
+            border-color: rgba(255, 109, 0, 0.3);
+            transform: translateY(-3px);
+        }
+
+        .problem-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--orange), var(--yellow));
+            opacity: 0;
+            transition: opacity 0.25s;
+        }
+
+        .problem-card:hover::before { opacity: 1; }
+
+        .problem-icon {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .problem-card h3 {
+            font-size: 1.15rem;
+            font-weight: 800;
+            margin-bottom: 14px;
+            color: var(--white);
+        }
+
+        .problem-card p {
+            font-size: 0.88rem;
+            color: var(--light-gray);
+            line-height: 1.7;
+        }
+
+        /* ============ SOLUTIONS (vs) ============ */
+        #approach { }
+
+        .solutions-list {
+            margin-top: 56px;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .solution-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            padding: 40px 0;
+        }
+
+        .solution-row:first-child { border-top: 1px solid rgba(255,255,255,0.06); }
+
+        .solution-old {
+            padding: 12px 32px 12px 0;
+            border-right: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .solution-new {
+            padding: 12px 0 12px 32px;
+        }
+
+        .solution-tag {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 100px;
+        }
+
+        .solution-tag.old {
+            color: #ff6b6b;
+            background: rgba(255, 107, 107, 0.08);
+        }
+
+        .solution-tag.new {
+            color: #51cf66;
+            background: rgba(81, 207, 102, 0.08);
+        }
+
+        .solution-row h4 {
+            font-size: 1.25rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: var(--yellow);
+        }
+
+        .solution-row p {
+            font-size: 0.88rem;
+            color: var(--light-gray);
+            line-height: 1.7;
+        }
+
+        /* ============ PROGRAMS ============ */
+        #programs { background: var(--dark); }
+
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 56px;
+        }
+
+        .program-card {
+            background: var(--black);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 16px;
+            padding: 40px 32px;
+            transition: border-color 0.25s, transform 0.2s;
+            position: relative;
+        }
+
+        .program-card:hover {
+            border-color: rgba(255, 214, 0, 0.25);
+            transform: translateY(-3px);
+        }
+
+        .program-badge {
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+            color: var(--yellow);
+            background: rgba(255, 214, 0, 0.1);
+            padding: 6px 14px;
+            border-radius: 100px;
+            display: inline-block;
+            margin-bottom: 24px;
+        }
+
+        .program-badge.orange {
+            color: var(--orange);
+            background: rgba(255, 109, 0, 0.1);
+        }
+
+        .program-card h3 {
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .program-card p {
+            font-size: 0.88rem;
+            color: var(--light-gray);
+            line-height: 1.7;
+            margin-bottom: 28px;
+        }
+
+        .program-topics {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .program-topics li {
+            font-size: 0.85rem;
+            color: var(--light-gray);
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            line-height: 1.5;
+        }
+
+        .program-topics li::before {
+            content: '→';
+            color: var(--yellow);
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        /* ============ MENTORS ============ */
+        #mentors { }
+
+        .mentors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+            margin-top: 56px;
+        }
+
+        .mentor-card {
+            background: var(--dark);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 12px;
+            padding: 32px 28px;
+            text-align: center;
+            transition: border-color 0.25s;
+        }
+
+        .mentor-card:hover { border-color: rgba(255, 214, 0, 0.2); }
+
+        .mentor-avatar {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+        }
+
+        .mentor-card h4 {
+            font-size: 1.05rem;
+            font-weight: 800;
+            margin-bottom: 6px;
+        }
+
+        .mentor-role {
+            font-size: 0.78rem;
+            color: var(--yellow);
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        .mentor-card p {
+            font-size: 0.82rem;
+            color: var(--light-gray);
+            line-height: 1.6;
+        }
+
+        /* ============ MANIFESTO ============ */
+        #manifesto {
+            background: var(--dark);
+            text-align: center;
+        }
+
+        #manifesto .section-title {
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .manifesto-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 24px;
+            margin-top: 56px;
+        }
+
+        .manifesto-item {
+            padding: 32px 24px;
+        }
+
+        .manifesto-item .number {
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+            font-size: 3rem;
+            color: var(--yellow);
+            line-height: 1;
+            margin-bottom: 12px;
+        }
+
+        .manifesto-item h4 {
+            font-size: 1rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: var(--white);
+        }
+
+        .manifesto-item p {
+            font-size: 0.84rem;
+            color: var(--light-gray);
+            line-height: 1.6;
+        }
+
+        /* ============ CTA ============ */
+        #contact {
+            padding: 120px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #contact::before {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(255, 214, 0, 0.07) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .cta-inner {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        .cta-inner .section-title {
+            margin-bottom: 20px;
+        }
+
+        .cta-inner .section-desc {
+            margin: 0 auto 48px;
+            max-width: 520px;
+        }
+
+        .cta-form {
+            display: flex;
+            gap: 12px;
+            max-width: 520px;
+            margin: 0 auto;
+        }
+
+        .cta-form input {
+            flex: 1;
+            padding: 16px 20px;
+            background: var(--dark);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            color: var(--white);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.92rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .cta-form input::placeholder { color: #666; }
+        .cta-form input:focus { border-color: var(--yellow); }
+
+        .cta-form button {
+            white-space: nowrap;
+        }
+
+        /* ============ FOOTER ============ */
+        footer {
+            border-top: 1px solid rgba(255,255,255,0.06);
+            padding: 48px 0;
+        }
+
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-copy {
+            font-size: 0.78rem;
+            color: var(--light-gray);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .footer-links a {
+            font-size: 0.8rem;
+            color: var(--light-gray);
+        }
+
+        .footer-links a:hover { color: var(--white); }
+
+        /* ============ MOBILE ============ */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .nav-cta { display: none; }
+            .hamburger { display: flex; }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 28px;
+            }
+
+            .solution-row {
+                grid-template-columns: 1fr;
+                gap: 16px;
+                padding: 32px 0;
+            }
+
+            .solution-old {
+                padding: 0 0 16px 0;
+                border-right: none;
+                border-bottom: 1px solid rgba(255,255,255,0.06);
+                padding-bottom: 16px;
+            }
+
+            .solution-new { padding: 0; }
+
+            .cta-form {
+                flex-direction: column;
+            }
+        }
+
+        /* ============ ANIMATIONS ============ */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate {
+            animation: fadeInUp 0.7s ease-out both;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--black); }
+        ::-webkit-scrollbar-thumb { background: var(--gray); border-radius: 4px; }
+    </style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav>
+    <div class="nav-inner">
+        <a href="#" class="logo">ИСКРА<span>.</span></a>
+        <ul class="nav-links">
+            <li><a href="#problems">Проблемы</a></li>
+            <li><a href="#approach">Подход</a></li>
+            <li><a href="#programs">Программы</a></li>
+            <li><a href="#mentors">Наставники</a></li>
+            <li><a href="#manifesto">Ценности</a></li>
+        </ul>
+        <a href="#contact" class="nav-cta">Записаться</a>
+        <button class="hamburger" onclick="document.querySelector('.nav-links').style.display = document.querySelector('.nav-links').style.display === 'flex' ? 'none' : 'flex'" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+    <div class="container hero-content">
+        <div class="hero-label animate">Школа нового формата · Хабаровск</div>
+        <h1 class="animate delay-1">
+            Зажигаем <span class="highlight">умы</span>,<br>
+            а не галочки<br>
+            в <span class="highlight-orange">отчётах</span>
+        </h1>
+        <p class="hero-sub animate delay-2">
+            Школа ИСКРА — место, где нет бюрократии, нет зубрёжки и нет «для галочки».
+            Реальные навыки, мини-группы до 15 человек, наставники-практики из индустрии.
+        </p>
+        <div class="hero-actions animate delay-3">
+            <a href="#contact" class="btn btn-primary">Записаться на пробный →</a>
+            <a href="#approach" class="btn btn-outline">Наш подход</a>
+        </div>
+        <div class="hero-stats animate delay-4">
+            <div>
+                <div class="hero-stat-value">15</div>
+                <div class="hero-stat-label">человек максимум<br>в группе</div>
+            </div>
+            <div>
+                <div class="hero-stat-value">0</div>
+                <div class="hero-stat-label">отчётов для<br>учителей</div>
+            </div>
+            <div>
+                <div class="hero-stat-value">100%</div>
+                <div class="hero-stat-label">наставников<br>из практики</div>
+            </div>
+            <div>
+                <div class="hero-stat-value">85%</div>
+                <div class="hero-stat-label">времени —<br>проекты</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== PROBLEMS ===== -->
+<section id="problems">
+    <div class="container">
+        <div class="section-label">Почему это важно</div>
+        <h2 class="section-title">Система сломана. Мы это знаем.</h2>
+        <p class="section-desc">
+            Российское образование не «работает плохо» — оно работает так, как спроектировано.
+            Мы проанализировали системные проблемы и построили школу наоборот.
+        </p>
+        <div class="problems-grid">
+            <div class="problem-card">
+                <span class="problem-icon">📋</span>
+                <h3>Бюрократия вместо обучения</h3>
+                <p>Учителя тратят 40–50% рабочего времени на отчёты и планы. В нашей школе — 0 отчётов. Учитель тратит время на подготовку уроков, а не на папки с бумагами.</p>
+            </div>
+            <div class="problem-card">
+                <span class="problem-icon">🏭</span>
+                <h3>Конвейер XVII века</h3>
+                <p>Ряды, 45 минут, один темп для всех. Эта модель создана для массовости, а не для развития. Мы используем проектное обучение, гибкое расписание и индивидуальные траектории.</p>
+            </div>
+            <div class="problem-card">
+                <span class="problem-icon">🚫</span>
+                <h3>Оторванность от жизни</h3>
+                <p>95% выпускников никогда не используют производные. Мы учим финансовую грамотность, право, предпринимательство, digital-навыки — то, что реально пригодится.</p>
+            </div>
+            <div class="problem-card">
+                <span class="problem-icon">📊</span>
+                <h3>Сортировка, а не обучение</h3>
+                <p>ЕГЭ и олимпиады нужны чтобы ранжировать, а не научить. У нас нет «отсева» — у каждого свой темп и свой путь к результату.</p>
+            </div>
+            <div class="problem-card">
+                <span class="problem-icon">👨‍🏫</span>
+                <h3>Учителя без опыта</h3>
+                <p>Преподаватели приходят из вуза в школу, не работая в индустрии. Как teaching Pascal в 2024-м? Наши наставники — действующие профессионалы.</p>
+            </div>
+            <div class="problem-card">
+                <span class="problem-icon">👥</span>
+                <h3>Нет индивидуального подхода</h3>
+                <p>5-7 учителей на 100 учеников в России. В Финляндии — 12-15. У нас: ментор на 10-15 учеников. Каждый ребёнок — не номер в журнале.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== APPROACH ===== -->
+<section id="approach">
+    <div class="container">
+        <div class="section-label">Наш подход</div>
+        <h2 class="section-title">Обычная школа vs ИСКРА</h2>
+        <p class="section-desc">Мы не «чуть лучше». Мы принципиально другие.</p>
+
+        <div class="solutions-list">
+            <div class="solution-row">
+                <div class="solution-old">
+                    <span class="solution-tag old">Обычная школа</span>
+                    <h4>Учитель — клерк</h4>
+                    <p>40-50% времени на отчёты, планы, журналы. Бумага важнее живого урока. Качество измеряется количеством заполненных форм.</p>
+                </div>
+                <div class="solution-new">
+                    <span class="solution-tag new">ИСКРА</span>
+                    <h4>Учитель — наставник</h4>
+                    <p>Ноль отчётов. Всё время учителя уходит на подготовку увлекательных уроков, обратную связь и работу с каждым учеником.</p>
+                </div>
+            </div>
+            <div class="solution-row">
+                <div class="solution-old">
+                    <span class="solution-tag old">Обычная школа</span>
+                    <h4>Учитель — лектор</h4>
+                    <p>45 минут говорения. Ряды. Один учебник на всех. Кто не успел — остался за бортом.</p>
+                </div>
+                <div class="solution-new">
+                    <span class="solution-tag new">ИСКРА</span>
+                    <h4>Учитель — фасилитатор</h4>
+                    <p>Проекты, дискуссии, групповая работа. Ученики сами находят решения, а не получают готовые ответы. Каждый учится в своём темпе.</p>
+                </div>
+            </div>
+            <div class="solution-row">
+                <div class="solution-old">
+                    <span class="solution-tag old">Обычная школа</span>
+                    <h4>Знания «на полке»</h4>
+                    <p>Логарифмы для сортировки, Pascal «потому что так в программе». Связи с реальной жизнью нет.</p>
+                </div>
+                <div class="solution-new">
+                    <span class="solution-tag new">ИСКРА</span>
+                    <h4>Навыки «в руках»</h4>
+                    <p>Финансовая грамотность, право, предпринимательство, программирование. Всё привязано к реальным задачам и проектам.</p>
+                </div>
+            </div>
+            <div class="solution-row">
+                <div class="solution-old">
+                    <span class="solution-tag old">Обычная школа</span>
+                    <h4>Один размер для всех</h4>
+                    <p>30-35 человек, одна программа, один темп. Успешные скучают, остальные не успевают.</p>
+                </div>
+                <div class="solution-new">
+                    <span class="solution-tag new">ИСКРА</span>
+                    <h4>Свой путь для каждого</h4>
+                    <p>Группы до 15 человек. Персональный учебный план. Ментор, который знает каждого ученика по имени и интересу.</p>
+                </div>
+            </div>
+            <div class="solution-row">
+                <div class="solution-old">
+                    <span class="solution-tag old">Обычная школа</span>
+                    <h4>Теория ради теории</h4>
+                    <p>«Это нужно, потому что так в программе». Учителя не знают, зачем учат тому, чему учат.</p>
+                </div>
+                <div class="solution-new">
+                    <span class="solution-tag new">ИСКРА</span>
+                    <h4>Практика ради результата</h4>
+                    <p>Каждый модуль заканчивается реальным продуктом: сайт, бизнес-план, прототип, презентация. Портфолио вместо тетрадок.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== PROGRAMS ===== -->
+<section id="programs">
+    <div class="container">
+        <div class="section-label">Программы</div>
+        <h2 class="section-title">Чему мы учим</h2>
+        <p class="section-desc">Не предметы. Навыки. Каждый модуль — реальный проект, а не учебник.</p>
+
+        <div class="programs-grid">
+            <div class="program-card">
+                <span class="program-badge">Фундамент</span>
+                <h3>Мышление и логика</h3>
+                <p>Не «математика», а умение думать. Анализ, аргументация, критическое мышление, структурирование информации.</p>
+                <ul class="program-topics">
+                    <li>Логика и научный метод</li>
+                    <li>Работа с данными и графиками</li>
+                    <li>Убедительная аргументация</li>
+                    <li>Решение реальных кейсов</li>
+                </ul>
+            </div>
+            <div class="program-card">
+                <span class="program-badge orange">Про жизнь</span>
+                <h3>Жизненные навыки</h3>
+                <p>Финансы, право, здоровье, коммуникации — всё, что нужно взрослому человеку в реальном мире.</p>
+                <ul class="program-topics">
+                    <li>Финансовая грамотность и инвестиции</li>
+                    <li>Основы права и налоги</li>
+                    <li>Эмоциональный интеллект</li>
+                    <li>Медицинская грамотность</li>
+                </ul>
+            </div>
+            <div class="program-card">
+                <span class="program-badge">Digital</span>
+                <h3>Цифровые навыки</h3>
+                <p>Программирование, дизайн, AI, медиа — навыки, которые будут актуальны не только при поступлении.</p>
+                <ul class="program-topics">
+                    <li>Программирование и автоматизация</li>
+                    <li>Веб-дизайн и UX</li>
+                    <li>AI-инструменты и промпты</li>
+                    <li>Создание контента и медиа</li>
+                </ul>
+            </div>
+            <div class="program-card">
+                <span class="program-badge orange">Движ</span>
+                <h3>Предпринимательство</h3>
+                <p>От идеи до запуска. Ученики создают реальные проекты, тестируют гипотезы и получают первый опыт.</p>
+                <ul class="program-topics">
+                    <li>Идеей — поиск и валидация</li>
+                    <li>MVP за 2 недели</li>
+                    <li>Презентация и питчинг</li>
+                    <li>Работа с реальными клиентами</li>
+                </ul>
+            </div>
+            <div class="program-card">
+                <span class="program-badge">Слово</span>
+                <h3>Коммуникация</h3>
+                <p>Писать, говорить, убеждать, слушать. Главные навыки XXI века — умение работать с людьми и текстом.</p>
+                <ul class="program-topics">
+                    <li>Письмо и сторителлинг</li>
+                    <li>Публичные выступления</li>
+                    <li>Дебаты и переговоры</li>
+                    <li>Работа в команде</li>
+                </ul>
+            </div>
+            <div class="program-card">
+                <span class="program-badge orange">Тело</span>
+                <h3>Здоровье и движение</h3>
+                <p>Спорт, осознанное питание, управление стрессом. Умная голова — в здоровом теле.</p>
+                <ul class="program-topics">
+                    <li>Персональные тренировки</li>
+                    <li>Командные виды спорта</li>
+                    <li>Управление стрессом</li>
+                    <li>Осознанные привычки</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== MENTORS ===== -->
+<section id="mentors">
+    <div class="container">
+        <div class="section-label">Наставники</div>
+        <h2 class="section-title">Практики, не теоретики</h2>
+        <p class="section-desc">Наши преподаватели — не «выпускники вуза, которые не знают другой работы». Реальные люди с реальным опытом.</p>
+
+        <div class="mentors-grid">
+            <div class="mentor-card">
+                <div class="mentor-avatar" style="background: rgba(255,214,0,0.1);">🧠</div>
+                <h4>Аналитик данных</h4>
+                <div class="mentor-role">8 лет в индустрии</div>
+                <p>Ведёт модули по мышлению и данным. Бывший аналитик в Яндексе.</p>
+            </div>
+            <div class="mentor-card">
+                <div class="mentor-avatar" style="background: rgba(255,109,0,0.1);">💼</div>
+                <h4>Предприниматель</h4>
+                <div class="mentor-role">3 стартапа, 2 выхода</div>
+                <p>Ведёт предпринимательский трек. Помогает ученикам запустить первый проект.</p>
+            </div>
+            <div class="mentor-card">
+                <div class="mentor-avatar" style="background: rgba(255,214,0,0.1);">⚖️</div>
+                <h4>Практикующий юрист</h4>
+                <div class="mentor-role">12 лет практики</div>
+                <p>Ведёт модуль по праву. Объясняет на реальных кейсах, а не по учебникам.</p>
+            </div>
+            <div class="mentor-card">
+                <div class="mentor-avatar" style="background: rgba(255,109,0,0.1);">💻</div>
+                <h4>Fullstack-разработчик</h4>
+                <div class="mentor-role">Open-source контрибьютор</div>
+                <p>Ведёт digital-трек. Пишет код с учениками на реальных проектах.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== MANIFESTO ===== -->
+<section id="manifesto">
+    <div class="container">
+        <div class="section-label">Манифест</div>
+        <h2 class="section-title">Школа должна зажигать,<br> а не гасить</h2>
+        <div class="manifesto-grid">
+            <div class="manifesto-item">
+                <div class="number">01</div>
+                <h4>Интерес важнее оценок</h4>
+                <p>Мы не ставим «пятёрки» за послушание. Мы зажигаем любопытство, которое не гаснет после звонка.</p>
+            </div>
+            <div class="manifesto-item">
+                <div class="number">02</div>
+                <h4>Проект важнее теста</h4>
+                <p>Реальный продукт важнее правильного ответа. Портфолио лучше аттестата. Результат важнее процесса.</p>
+            </div>
+            <div class="manifesto-item">
+                <div class="number">03</div>
+                <h4>Человек важнее системы</h4>
+                <p>Каждый ученик — личность, а не номер в журнале. Мы подстраиваем программу под ребёнка, а не наоборот.</p>
+            </div>
+            <div class="manifesto-item">
+                <div class="number">04</div>
+                <h4>Праctica важнее теории</h4>
+                <p>Учить тому, что пригодится. Знания без применения — мусор. Каждый модуль заканчивается реальным продуктом.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section id="contact">
+    <div class="container">
+        <div class="cta-inner">
+            <div class="section-label">Начните сегодня</div>
+            <h2 class="section-title">Запишите ребёнка<br>на <span style="color: var(--yellow);">пробный урок</span></h2>
+            <p class="section-desc">Бесплатно. Без обязательств. Приходите и посмотрите, как выглядит школа, в которую хочется ходить.</p>
+            <form class="cta-form" onsubmit="handleSubmit(event)">
+                <input type="tel" placeholder="Ваш телефон" id="phone-input" required>
+                <button type="submit" class="btn btn-primary">Отправить</button>
+            </form>
+            <p style="font-size: 0.72rem; color: #555; margin-top: 16px;">Перезвоним в течение 2 часов. Или напишите нам в <a href="https://t.me/iska_school" style="color: var(--yellow); text-decoration: underline;">Telegram</a>.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <div class="container">
+        <div class="footer-inner">
+            <div class="footer-copy">© 2025 ИСКРА. Хабаровск. Зажигаем умы.</div>
+            <ul class="footer-links">
+                <li><a href="mailto:hello@iskra-school.ru">hello@iskra-school.ru</a></li>
+                <li><a href="tel:+74212000000">+7 (4212) 00-00-00</a></li>
+                <li><a href="https://t.me/iska_school" target="_blank">Telegram</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+
+    // Form handler
+    function handleSubmit(e) {
+        e.preventDefault();
+        const phone = document.getElementById('phone-input').value;
+        const btn = e.target.querySelector('button');
+        btn.textContent = 'Отправлено ✓';
+        btn.style.background = '#51cf66';
+        setTimeout(() => {
+            btn.textContent = 'Отправить';
+            btn.style.background = '';
+            document.getElementById('phone-input').value = '';
+        }, 3000);
+    }
+
+    // Animate on scroll
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.problem-card, .program-card, .mentor-card, .solution-row, .manifesto-item').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(24px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
+    });
+</script>
+
+</body>
+</html>
