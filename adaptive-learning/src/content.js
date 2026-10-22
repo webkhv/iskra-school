@@ -97,3 +97,37 @@ export const LESSONS = {
 
 export const getTopicEntries = subject => Object.entries(LESSONS[subject].topics);
 export const getDefaultTopic = subject => getTopicEntries(subject)[0][0];
+
+export const CONTENT_SCHEMA_VERSION = 1;
+
+const REQUIRED_TOPIC_TEXT_FIELDS = [
+  "title", "objective", "visualDescription", "concept", "example",
+  "question", "hint", "explanation"
+];
+
+export function validateTopic(topic) {
+  const errors = [];
+  if (!topic || typeof topic !== "object" || Array.isArray(topic)) {
+    return ["topic must be an object"];
+  }
+  for (const field of REQUIRED_TOPIC_TEXT_FIELDS) {
+    if (typeof topic[field] !== "string" || !topic[field].trim()) {
+      errors.push(`${field} must be a non-empty string`);
+    }
+  }
+  if (!Array.isArray(topic.visual) || topic.visual.length !== 4 ||
+      !topic.visual.every(value => typeof value === "boolean")) {
+    errors.push("visual must contain exactly four boolean values");
+  }
+  if (!Array.isArray(topic.options) || topic.options.length < 2 ||
+      !topic.options.every(value => typeof value === "string" && value.trim())) {
+    errors.push("options must contain at least two non-empty strings");
+  } else if (new Set(topic.options).size !== topic.options.length) {
+    errors.push("options must be unique");
+  }
+  if (!Number.isInteger(topic.correctIndex) || !Array.isArray(topic.options) ||
+      topic.correctIndex < 0 || topic.correctIndex >= topic.options.length) {
+    errors.push("correctIndex must point to an existing option");
+  }
+  return errors;
+}
