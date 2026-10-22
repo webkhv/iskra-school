@@ -48,9 +48,9 @@ function renderLesson() {
     feedback.textContent = "";
     feedback.className = "feedback";
   }));
-  progressBar.style.width = (state.step / 3 * 100) + "%";
-  stepLabel.textContent = `ШАГ ${state.step} ИЗ 3`;
-  nextButton.innerHTML = state.submitted ? (state.step === 3 ? "Завершить урок <span>↗</span>" : "Следующий шаг <span>↗</span>") : "Проверить ответ <span>↗</span>";
+  progressBar.style.width = state.submitted ? "100%" : "45%";
+  stepLabel.textContent = state.submitted ? "УРОК ЗАВЕРШЁН" : "ЗАДАНИЕ 1 ИЗ 1";
+  nextButton.innerHTML = state.submitted ? "Завершить урок <span>↗</span>" : "Проверить ответ <span>↗</span>";
   hintButton.disabled = state.submitted;
   hintButton.style.opacity = state.submitted ? ".45" : "1";
   renderProfile();
@@ -64,19 +64,10 @@ function showHint() {
 }
 function submitOrContinue() {
   if (state.submitted) {
-    if (state.step >= 3) {
-      feedback.className = "feedback";
-      feedback.textContent = "Урок завершён. Попробуй другую тему или подачу — так можно проверить, что удобнее именно сейчас.";
-      nextButton.textContent = "Начать заново";
-      nextButton.dataset.restart = "true";
-      return;
-    }
-    state.step += 1;
-    state.selectedAnswer = null;
-    state.submitted = false;
-    feedback.textContent = "";
     feedback.className = "feedback";
-    renderLesson();
+    feedback.textContent = "Урок завершён. Попробуй другую тему или подачу — так можно проверить, что удобнее именно сейчас.";
+    nextButton.textContent = "Начать заново";
+    nextButton.dataset.restart = "true";
     return;
   }
   if (state.selectedAnswer === null) {
