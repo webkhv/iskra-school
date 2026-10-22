@@ -18,7 +18,7 @@
 2. **Improve the learning content:** define learning objectives and age appropriateness; have educators review each lesson.
 3. **Expand the content schema workflow:** schema version and topic validation exist; add authoring tooling and validate educator-authored content in CI.
 4. **Prototype the parent overview:** show completed topics, observable practice results and cautious next-step suggestions—never personality labels.
-5. **Run family usability sessions:** use consent and age-appropriate assent; evaluate accessibility and whether children understand feedback.
+5. **Run family usability sessions:** protocol drafted in [PILOT-PLAN.md](./PILOT-PLAN.md); conduct sessions only after consent, assent and legal review.
 6. **Evaluate learning outcomes:** compare adaptive and non-adaptive approaches, including delayed recall and subgroup fairness.
 7. **Decide whether accounts are necessary:** if yes, design guardian controls, authorization, consent, retention, export and deletion before implementing sync.
 8. **Prepare production operations:** CI, staging/production environments, monitoring, backups, incident response and support ownership.
@@ -37,3 +37,5 @@
 ## Production readiness is not yet achieved
 
 The current app is a static prototype. It has no authentication, backend, synced parent view, operational monitoring or deployment pipeline. Those are deliberate future decisions, not existing features.
+
+See [PRODUCTION-READINESS.md](./PRODUCTION-READINESS.md) for release gates and [ACCESSIBILITY-CHECKLIST.md](./ACCESSIBILITY-CHECKLIST.md) for manual checks.
