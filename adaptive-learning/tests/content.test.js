@@ -1,13 +1,17 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { APP_CONFIG } from "../src/config.js";
-import { LESSONS, getDefaultTopic, getTopicEntries } from "../src/content.js";
+import { CONTENT_SCHEMA_VERSION, LESSONS, getDefaultTopic, getTopicEntries, validateTopic } from "../src/content.js";
 
 test("configured age bands and explanation styles are available", () => {
   assert.deepEqual(APP_CONFIG.ageBands.map(({ value }) => value), [7, 10, 13]);
   assert.deepEqual(Object.keys(APP_CONFIG.styles), ["story", "steps", "visual"]);
   assert.equal(APP_CONFIG.audioEnabled, false);
   assert.equal(APP_CONFIG.persistSession, false);
+});
+
+test("lesson catalog exposes an explicit schema version", () => {
+  assert.equal(CONTENT_SCHEMA_VERSION, 1);
 });
 
 test("each subject has a valid default topic", () => {
@@ -36,6 +40,7 @@ test("every lesson has a question, options, hint, explanation and valid answer i
       assert.ok(topic.correctIndex >= 0 && topic.correctIndex < topic.options.length, `${context}: answer index out of range`);
       assert.ok(topic.hint, `${context}: missing hint`);
       assert.ok(topic.explanation, `${context}: missing explanation`);
+      assert.deepEqual(validateTopic(topic), [], `${context}: invalid topic schema`);
     }
   }
 });
