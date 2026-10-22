@@ -6,10 +6,12 @@ const html = await readFile(new URL("../index.html", import.meta.url), "utf8");
 const app = await readFile(new URL("../src/app.js", import.meta.url), "utf8");
 
 test("parent summary exposes observable session facts and a next-step suggestion", () => {
-  for (const id of ["parentTopic", "profileStyle", "profileAccuracy", "profileHints", "profileNote", "parentNextStep"]) {
+  for (const id of ["parentTopic", "parentObjective", "profileStyle", "profileAccuracy", "profileHints", "profileNote", "parentNextStep"]) {
     assert.ok(html.includes(`id="${id}"`), `Missing parent summary element: ${id}`);
   }
   assert.match(app, /currentTopic\(\)\.title/);
+  assert.match(app, /parentObjective/);
+  assert.match(app, /topic\.objective/);
   assert.match(app, /state\.lastCorrect/);
 });
 
