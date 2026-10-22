@@ -7,12 +7,16 @@
 - Questions, hints, correctness feedback and session-only summary.
 - No voice capture or psychological inference.
 - Initial Node.js unit tests for lesson structure and adaptation logic.
+- Explicit lesson content schema version and runtime validation helper.
+- Learning objectives and text descriptions for diagrams.
+- Parent summary includes the objective practised and session-only results.
+- Initial accessibility metadata and manual accessibility checklist.
 
 ## Delivery sequence: child app with parent overview
 
 1. **Stabilize the learning loop:** fix interaction edge cases, add accessibility checks, and keep automated tests passing.
 2. **Improve the learning content:** define learning objectives and age appropriateness; have educators review each lesson.
-3. **Create a versioned content schema:** validate lesson JSON and add a content authoring workflow.
+3. **Expand the content schema workflow:** schema version and topic validation exist; add authoring tooling and validate educator-authored content in CI.
 4. **Prototype the parent overview:** show completed topics, observable practice results and cautious next-step suggestions—never personality labels.
 5. **Run family usability sessions:** use consent and age-appropriate assent; evaluate accessibility and whether children understand feedback.
 6. **Evaluate learning outcomes:** compare adaptive and non-adaptive approaches, including delayed recall and subgroup fairness.
