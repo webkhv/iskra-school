@@ -47,3 +47,10 @@
 Первый продукт — самостоятельное приложение ребёнка с понятным обзором учебной практики для родителя. Сначала укрепляем учебный цикл и тестируем контент, затем проверяем удобство с семьями. Аккаунты, синхронизацию и серверное хранение добавляем только после отдельного проектирования приватности и доступа.
 
 См. `docs/PRODUCT.md`, `docs/PRIVACY-AND-SAFETY.md` и `docs/ROADMAP.md`.
+
+
+## Content and accessibility review
+
+- Lesson field definitions and editorial rules: [docs/CONTENT-GUIDE.md](./docs/CONTENT-GUIDE.md).
+- Manual keyboard, screen-reader, visual and family usability checks: [docs/ACCESSIBILITY-CHECKLIST.md](./docs/ACCESSIBILITY-CHECKLIST.md).
+- The age selector currently changes the introductory note only; it does not yet select a distinct age-specific curriculum.
