@@ -54,3 +54,6 @@
 - Lesson field definitions and editorial rules: [docs/CONTENT-GUIDE.md](./docs/CONTENT-GUIDE.md).
 - Manual keyboard, screen-reader, visual and family usability checks: [docs/ACCESSIBILITY-CHECKLIST.md](./docs/ACCESSIBILITY-CHECKLIST.md).
 - The age selector currently changes the introductory note only; it does not yet select a distinct age-specific curriculum.
+
+- Family usability pilot protocol: [docs/PILOT-PLAN.md](./docs/PILOT-PLAN.md).
+- Public-launch gates: [docs/PRODUCTION-READINESS.md](./docs/PRODUCTION-READINESS.md).
