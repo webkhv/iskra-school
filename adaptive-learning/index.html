@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f3ed">
+  <meta name="description" content="Искра — адаптивный учебный помощник для школьников 7–16 лет.">
+  <title>Искра — учиться своим способом</title>
+  <link rel="stylesheet" href="./src/styles.css">
+</head>
+<body>
+<div class="app-shell">
+<header class="topbar"><a class="brand" href="#"><span class="brand-mark">✳</span><span>искрa<span class="brand-dot">.</span></span></a><div class="topbar-note">Учебный помощник · демо</div></header>
+<main>
+<section class="hero"><div class="eyebrow"><span class="pulse"></span> УЧЁБА, КОТОРАЯ ПОДСТРАИВАЕТСЯ</div><h1>Понимать —<br><span class="serif">интереснее, чем зубрить.</span></h1><p class="hero-copy">Выбери тему, попробуй объяснение и реши короткое задание. Искра будет менять подачу по твоим ответам — без ярлыков и тестов на «тип личности».</p><div class="hero-meta"><span>◷ 3–5 минут</span><span>↗ Можно начать без регистрации</span><span>⌂ Данные остаются в этом браузере</span></div></section>
+<section class="workspace">
+<aside class="side-panel"><div class="panel-label">ТВОЯ СЕССИЯ</div>
+<label for="learnerAge">Возраст</label><select id="learnerAge"><option value="7">7–9 лет</option><option value="10" selected>10–12 лет</option><option value="13">13–16 лет</option></select>
+<label for="subject">Предмет</label><select id="subject"><option value="math">Математика</option><option value="science">Естествознание</option><option value="language">Русский язык</option></select>
+<label for="topic">Тема</label><select id="topic"></select><div class="side-divider"></div><div class="panel-label">ЧТО ТЕБЕ БЛИЖЕ?</div><p class="side-hint">Это не постоянный тип — можно менять в любой момент.</p>
+<div class="choice-list" id="styleChoices">
+<button class="style-choice selected" data-style="story"><span class="choice-icon">✦</span><span><b>История или пример</b><small>Объяснить на знакомой ситуации</small></span><span class="radio-dot"></span></button>
+<button class="style-choice" data-style="steps"><span class="choice-icon">↗</span><span><b>По шагам</b><small>От простого к сложному</small></span><span class="radio-dot"></span></button>
+<button class="style-choice" data-style="visual"><span class="choice-icon">▦</span><span><b>Схема и закономерность</b><small>Увидеть, как всё устроено</small></span><span class="radio-dot"></span></button></div>
+<div class="privacy-note"><span>◈</span><p><b>Приватность прежде всего</b><br>Демо не записывает голос, не ставит диагнозы и не отправляет ответы на сервер.</p></div></aside>
+<div class="lesson-panel"><div class="lesson-head"><div><div class="panel-label">МИКРОУРОК</div><h2 id="lessonTitle">Доли и дроби</h2></div><span class="lesson-tag" id="ageTag">10–12 лет</span></div>
+<div class="progress-track"><span id="progressBar"></span></div><div id="lessonContent" class="lesson-content"></div><div id="quizArea" class="quiz-area"></div><div id="feedback" class="feedback" aria-live="polite"></div>
+<div class="lesson-actions"><button id="hintButton" class="button button-quiet">Подсказка</button><button id="nextButton" class="button button-primary">Проверить ответ <span>↗</span></button></div><div class="lesson-foot"><span id="stepLabel">ШАГ 1 ИЗ 3</span><span>Учимся на практике</span></div></div>
+</section>
+<section class="insights"><div class="insights-intro"><div class="panel-label">КАК МЕНЯЕТСЯ ПОДАЧА</div><h2>Не профиль личности.<br><span class="serif">Карта учебных предпочтений.</span></h2><p>Система отмечает только то, что помогает учиться: выбранную подачу, ответы и запросы подсказок. Любое предположение можно изменить.</p></div>
+<div class="profile-card"><div class="profile-card-head"><span class="profile-icon">◉</span><span class="panel-label">ТЕКУЩАЯ СЕССИЯ</span><span class="status-pill">Обновляется</span></div><div class="profile-stat"><span>Выбранный формат</span><b id="profileStyle">Истории и примеры</b></div><div class="profile-stat"><span>Ответы верно</span><b id="profileAccuracy">—</b></div><div class="profile-stat"><span>Подсказки</span><b id="profileHints">0</b></div><div class="profile-note" id="profileNote">Реши задание — и здесь появится сводка по этой сессии.</div><button id="resetButton" class="reset-button">Сбросить сессию и локальные данные ↺</button></div></section>
+</main><footer><span>ИСКРА · ПРОТОТИП 0.1</span><span>Инструмент для обучения, не психологическая диагностика.</span></footer>
+</div><script type="module" src="./src/app.js"></script>
+</body></html>
