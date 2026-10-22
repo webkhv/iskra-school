@@ -32,14 +32,14 @@ function populateTopics() {
   topicSelect.value = state.topicKey;
 }
 function drawVisual(topic) {
-  return `<div class="visual-fraction" aria-label="Условная схема частей">${topic.visual.map(filled => `<span class="fraction-block"><span class="${filled ? "filled" : ""}"></span></span>`).join("")}</div>`;
+  return `<div class="visual-fraction" role="img" aria-label="${escapeHtml(topic.visualDescription || topic.title)}">${topic.visual.map(filled => `<span class="fraction-block" aria-hidden="true"><span class="${filled ? "filled" : ""}"></span></span>`).join("")}</div><p class="visual-caption">${escapeHtml(topic.visualDescription || "Условная схема к теме.")}</p>`;
 }
 function renderLesson() {
   const topic = currentTopic();
   const lesson = buildLesson(topic, state.style, state.ageBand);
   lessonTitle.textContent = topic.title;
   $("#ageTag").textContent = APP_CONFIG.ageBands.find(a => a.value === state.ageBand)?.label ?? "10–12 лет";
-  lessonContent.innerHTML = `<h3>${escapeHtml(lesson.ageNote)}</h3><p>${escapeHtml(lesson.opening)}</p>${lesson.showVisual ? drawVisual(topic) : ""}<div class="example-box"><strong>Пример</strong><br>${escapeHtml(lesson.example)}</div>`;
+  lessonContent.innerHTML = `<h3>${escapeHtml(lesson.ageNote)}</h3><p class="learning-objective"><strong>Цель:</strong> ${escapeHtml(topic.objective)}</p><p>${escapeHtml(lesson.opening)}</p>${lesson.showVisual ? drawVisual(topic) : ""}<div class="example-box"><strong>Пример</strong><br>${escapeHtml(lesson.example)}</div>`;
   quizArea.innerHTML = `<p class="quiz-question">${escapeHtml(topic.question)}</p><div class="answer-list">${topic.options.map((option, i) => `<button type="button" class="answer-option ${state.selectedAnswer === i ? "chosen" : ""}" data-answer="${i}" ${state.submitted ? "disabled" : ""}>${escapeHtml(option)}</button>`).join("")}</div>`;
   quizArea.querySelectorAll("[data-answer]").forEach(button => button.addEventListener("click", () => {
     if (state.submitted) return;
@@ -50,7 +50,7 @@ function renderLesson() {
   }));
   progressBar.style.width = state.submitted ? "100%" : "45%";
   stepLabel.textContent = state.submitted ? "УРОК ЗАВЕРШЁН" : "ЗАДАНИЕ 1 ИЗ 1";
-  nextButton.innerHTML = state.submitted ? "Завершить урок <span>↗</span>" : "Проверить ответ <span>↗</span>";
+  nextButton.innerHTML = state.submitted ? "Начать заново <span>↻</span>" : "Проверить ответ <span>↗</span>";
   hintButton.disabled = state.submitted;
   hintButton.style.opacity = state.submitted ? ".45" : "1";
   renderProfile();
@@ -64,10 +64,7 @@ function showHint() {
 }
 function submitOrContinue() {
   if (state.submitted) {
-    feedback.className = "feedback";
-    feedback.textContent = "Урок завершён. Попробуй другую тему или подачу — так можно проверить, что удобнее именно сейчас.";
-    nextButton.textContent = "Начать заново";
-    nextButton.dataset.restart = "true";
+    resetSession();
     return;
   }
   if (state.selectedAnswer === null) {
@@ -92,6 +89,7 @@ function syncStyleButtons() {
 }
 function renderProfile() {
   $("#parentTopic").textContent = currentTopic().title;
+  $("#parentObjective").textContent = currentTopic().objective;
   $("#profileStyle").textContent = APP_CONFIG.styles[state.style].label;
   $("#profileAccuracy").textContent = state.answered ? `${state.correct} / ${state.answered} (${Math.round(state.correct / state.answered * 100)}%)` : "—";
   $("#profileHints").textContent = String(state.hints);
