@@ -91,12 +91,18 @@ function syncStyleButtons() {
   $("#profileStyle").textContent = APP_CONFIG.styles[state.style].label;
 }
 function renderProfile() {
+  $("#parentTopic").textContent = currentTopic().title;
   $("#profileStyle").textContent = APP_CONFIG.styles[state.style].label;
   $("#profileAccuracy").textContent = state.answered ? `${state.correct} / ${state.answered} (${Math.round(state.correct / state.answered * 100)}%)` : "—";
   $("#profileHints").textContent = String(state.hints);
   $("#profileNote").textContent = state.answered
-    ? "Это сводка только по текущим заданиям. Она не описывает способности или личность и сбрасывается вместе с сессией."
-    : "Реши задание — здесь появится сводка по этой сессии.";
+    ? "Результат относится только к заданиям этой сессии. Он не определяет способности ребёнка и исчезнет после сброса."
+    : "После ответа здесь появится результат текущей учебной попытки.";
+  $("#parentNextStep").textContent = !state.answered
+    ? "Следующий шаг: предложите ребёнку рассказать своими словами, как он рассуждал."
+    : state.lastCorrect
+      ? "Идея для продолжения: попросите ребёнка объяснить правило своими словами или попробовать другую тему."
+      : "Идея для продолжения: вернитесь к примеру или попробуйте объяснение по шагам. Одна ошибка не определяет уровень знаний.";
 }
 function resetSession() {
   state.step = 1; state.selectedAnswer = null; state.submitted = false;
