@@ -1,0 +1,20 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
+
+const html = await readFile(new URL("../index.html", import.meta.url), "utf8");
+const app = await readFile(new URL("../src/app.js", import.meta.url), "utf8");
+
+test("parent summary exposes observable session facts and a next-step suggestion", () => {
+  for (const id of ["parentTopic", "profileStyle", "profileAccuracy", "profileHints", "profileNote", "parentNextStep"]) {
+    assert.ok(html.includes(`id="${id}"`), `Missing parent summary element: ${id}`);
+  }
+  assert.match(app, /currentTopic\(\)\.title/);
+  assert.match(app, /state\.lastCorrect/);
+});
+
+test("prototype keeps progress session-only and does not enable audio", async () => {
+  const config = await readFile(new URL("../src/config.js", import.meta.url), "utf8");
+  assert.match(config, /persistSession:\s*false/);
+  assert.match(config, /audioEnabled:\s*false/);
+});
