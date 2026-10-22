@@ -24,6 +24,11 @@ test("every lesson has a question, options, hint, explanation and valid answer i
     for (const [key, topic] of Object.entries(data.topics)) {
       const context = `${subject}/${key}`;
       assert.ok(topic.title, `${context}: missing title`);
+      assert.ok(topic.objective, `${context}: missing learning objective`);
+      assert.ok(topic.visualDescription, `${context}: missing accessible visual description`);
+      assert.ok(Array.isArray(topic.visual) && topic.visual.length > 0, `${context}: missing visual data`);
+      assert.equal(new Set(topic.options).size, topic.options.length, `${context}: duplicate answer options`);
+      assert.ok(topic.options.every(option => typeof option === "string" && option.trim()), `${context}: answer options must be non-empty strings`);
       assert.ok(topic.concept, `${context}: missing concept`);
       assert.ok(topic.question, `${context}: missing question`);
       assert.ok(Array.isArray(topic.options) && topic.options.length >= 2, `${context}: invalid options`);
