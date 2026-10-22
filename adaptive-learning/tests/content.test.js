@@ -44,3 +44,20 @@ test("every lesson has a question, options, hint, explanation and valid answer i
     }
   }
 });
+
+test("topic validator rejects malformed records", () => {
+  assert.ok(validateTopic(null).length > 0);
+  assert.ok(validateTopic({
+    title: "Bad topic",
+    objective: "Objective",
+    visualDescription: "Diagram",
+    concept: "Concept",
+    example: "Example",
+    visual: [true, "no", false, false],
+    question: "Question?",
+    options: ["same", "same"],
+    correctIndex: 4,
+    hint: "Hint",
+    explanation: "Explanation"
+  }).length > 0);
+});
