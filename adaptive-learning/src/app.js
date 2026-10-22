@@ -105,7 +105,6 @@ function renderProfile() {
 function resetSession() {
   state.step = 1; state.selectedAnswer = null; state.submitted = false;
   state.correct = 0; state.answered = 0; state.hints = 0; state.streak = 0; state.lastCorrect = null;
-  delete nextButton.dataset.restart;
   feedback.textContent = ""; feedback.className = "feedback";
   renderLesson();
 }
@@ -120,7 +119,6 @@ document.querySelectorAll("[data-style]").forEach(button => button.addEventListe
 }));
 hintButton.addEventListener("click", showHint);
 nextButton.addEventListener("click", () => {
-  if (nextButton.dataset.restart === "true") { resetSession(); return; }
   submitOrContinue();
 });
 $("#resetButton").addEventListener("click", () => {
