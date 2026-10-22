@@ -40,11 +40,11 @@ function renderLesson() {
   lessonTitle.textContent = topic.title;
   $("#ageTag").textContent = APP_CONFIG.ageBands.find(a => a.value === state.ageBand)?.label ?? "10–12 лет";
   lessonContent.innerHTML = `<h3>${escapeHtml(lesson.ageNote)}</h3><p class="learning-objective"><strong>Цель:</strong> ${escapeHtml(topic.objective)}</p><p>${escapeHtml(lesson.opening)}</p>${lesson.showVisual ? drawVisual(topic) : ""}<div class="example-box"><strong>Пример</strong><br>${escapeHtml(lesson.example)}</div>`;
-  quizArea.innerHTML = `<p class="quiz-question">${escapeHtml(topic.question)}</p><div class="answer-list">${topic.options.map((option, i) => `<button type="button" class="answer-option ${state.selectedAnswer === i ? "chosen" : ""}" data-answer="${i}" ${state.submitted ? "disabled" : ""}>${escapeHtml(option)}</button>`).join("")}</div>`;
+  quizArea.innerHTML = `<p class="quiz-question" id="currentQuestion">${escapeHtml(topic.question)}</p><div class="answer-list">${topic.options.map((option, i) => `<button type="button" class="answer-option ${state.selectedAnswer === i ? "chosen" : ""}" data-answer="${i}" aria-pressed="${state.selectedAnswer === i ? "true" : "false"}" aria-describedby="currentQuestion" ${state.submitted ? "disabled" : ""}>${escapeHtml(option)}</button>`).join("")}</div>`;
   quizArea.querySelectorAll("[data-answer]").forEach(button => button.addEventListener("click", () => {
     if (state.submitted) return;
     state.selectedAnswer = Number(button.dataset.answer);
-    quizArea.querySelectorAll("[data-answer]").forEach(b => b.classList.toggle("chosen", b === button));
+    quizArea.querySelectorAll("[data-answer]").forEach(b => { b.classList.toggle("chosen", b === button); b.setAttribute("aria-pressed", String(b === button)); });
     feedback.textContent = "";
     feedback.className = "feedback";
   }));
@@ -84,7 +84,7 @@ function submitOrContinue() {
   renderLesson();
 }
 function syncStyleButtons() {
-  document.querySelectorAll("[data-style]").forEach(button => button.classList.toggle("selected", button.dataset.style === state.style));
+  document.querySelectorAll("[data-style]").forEach(button => { const selected = button.dataset.style === state.style; button.classList.toggle("selected", selected); button.setAttribute("aria-pressed", String(selected)); });
   $("#profileStyle").textContent = APP_CONFIG.styles[state.style].label;
 }
 function renderProfile() {
