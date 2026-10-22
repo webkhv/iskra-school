@@ -1,15 +1,13 @@
-# Iskra Learn
+# Iskra School and Iskra Learn
 
-Адаптивный учебный помощник для школьников 7–16 лет. MVP: короткий onboarding, подбор объяснений, задания и обновляемый учебный профиль на основе явных предпочтений и результатов заданий.
+The repository's existing school website remains at the root.
 
-## Принципы
-- Не диагностирует личность, эмоции или психические состояния.
-- Аудио опционально и в MVP не анализируется автоматически.
-- Профиль основан на ответах ученика и наблюдаемом учебном прогрессе.
-- Можно просмотреть и сбросить локальные данные.
+## Adaptive learning prototype
 
-## Запуск
-Откройте `index.html` в браузере. Сервер и ключи API не требуются.
+The Iskra Learn prototype is in [`adaptive-learning/`](./adaptive-learning/). It is a modular, browser-based demo for personalized learning for ages 7–16.
 
-## Настройка
-Изменяйте `src/config.js`, `src/content.js` и `src/adaptation.js`. См. `docs/ROADMAP.md`.
+- Start with [the app entry point](./adaptive-learning/index.html).
+- Read [setup and configuration notes](./adaptive-learning/README.md).
+- See the [roadmap and validation criteria](./adaptive-learning/docs/ROADMAP.md).
+
+The prototype adapts lesson presentation based on explicit format choices and answers to practice questions. It does not record audio, make psychological diagnoses, or send learner data to a server. It is not yet a production-ready service.
