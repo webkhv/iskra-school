@@ -1,0 +1,14 @@
+{
+  "name": "iskra-learn",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Privacy-first adaptive learning prototype for children and parents",
+  "scripts": {
+    "test": "node --test",
+    "check": "node --check src/app.js && node --check src/adaptation.js && node --check src/content.js && node --check src/config.js && npm test"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
