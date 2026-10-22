@@ -15,6 +15,12 @@ test("parent summary exposes observable session facts and a next-step suggestion
   assert.match(app, /state\.lastCorrect/);
 });
 
+test("interactive selections expose accessible pressed state", () => {
+  assert.match(html, /data-style="story" aria-pressed="true"/);
+  assert.match(app, /setAttribute\("aria-pressed", String\(selected\)\)/);
+  assert.match(app, /aria-describedby="currentQuestion"/);
+});
+
 test("prototype keeps progress session-only and does not enable audio", async () => {
   const config = await readFile(new URL("../src/config.js", import.meta.url), "utf8");
   assert.match(config, /persistSession:\s*false/);
